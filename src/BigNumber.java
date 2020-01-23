@@ -1,11 +1,16 @@
 class BigNumber {
     double b;
-    // Constructor 1
-    public BigNumber(String s) { }
-    // Constructor 2
-    public BigNumber(BigNumber b) { }
+    // Constructor 1 -- Lo utilizaremos para mostrar todas las operaciones.
+    public BigNumber(String s) {
+
+    }
+    // Constructor 2 -- Lo utilizaremos para
+    public BigNumber(BigNumber b) {
+
+    }
     // Suma
     BigNumber add(BigNumber other) {
+
         return null;
     }
     // Resta
