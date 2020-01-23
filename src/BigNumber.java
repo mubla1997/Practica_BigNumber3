@@ -6,7 +6,7 @@ class BigNumber {
     }
     // Constructor 2 -- Lo utilizaremos para
     public BigNumber(BigNumber b) {
-
+//potato
     }
     // Suma
     BigNumber add(BigNumber other) {
