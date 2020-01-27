@@ -1,20 +1,56 @@
 class BigNumber {
     double b;
-
+    String num;
     // Constructor 1
     public BigNumber(String s) {
-    BigNumber n1 = new BigNumber("4");
+    this.num = s;  // Almacenaremos todos los números
     }
     // Constructor 2
     public BigNumber(BigNumber b) {
-    BigNumber n2 = new BigNumber("3");
+
     }
 
     // Suma
     BigNumber add(BigNumber other) {
+        int longi; // Variable en la que guardaremos el tamaño del número más grande de la suma.
+        int result;
+        String str= "";
+        int add = 0;
+      //  BigNumber result = new BigNumber("4"); // Con el resultado final
 
-        return null;
+        if(other.num.length() > this.num.length()){
+            longi = other.num.length();
+            while(longi != this.num.length()){
+                this.num = "0" + this.num;
+            }
+        }else {
+            longi = this.num.length();
+            while (longi != other.num.length()) {
+                other.num = "0" + other.num;
+            }
+        }
+
+        for (int i = 0; i < this.num.length() ; i++) {
+            result = (this.num.charAt(this.num.length()-i-1) - 48) + (other.num.charAt(other.num.length()-i-1) - 48) + add;
+
+            if(result >= 10){
+               if(i==0) {
+                   this.num += "1" + this.num;
+                   other.num += "0" + this.num;
+                   result = result -10;
+               }else{
+                   add = 1;
+                   result = result - 10;
+               }
+            } else  {
+                add = 0;
+            }
+            str += String.valueOf(result);
+        }
+        BigNumber resultFinal = new BigNumber(str);
+        return resultFinal;
     }
+
     // Resta
     BigNumber sub(BigNumber other) {
         return null;
@@ -43,6 +79,7 @@ class BigNumber {
     BigNumber mcd(BigNumber other) {
         return null;
     }
+
     // Compara dos BigNumber. Torna 0 si són iguals, -1.
 // si el primer és menor i torna 1 si el segon és menor
     public int compareTo(BigNumber other) {
@@ -65,6 +102,10 @@ class BigNumber {
             return true;
         }else if(!(other instanceof BigNumber)){ // SI other no es un BigNumber dará error
             return false;
+        }else if(other.values.lenght() > this.values.lenght()) {
+            
+        }else if(other.values.lenght() < this.values.lenght()){
+
         }
         return false;
     }
