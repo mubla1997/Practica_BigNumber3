@@ -14,11 +14,11 @@ class BigNumber {
     // Suma
     BigNumber add(BigNumber other) {
         int longi; // Variable en la que guardaremos el tamaño del número más grande de la suma.
-        int result;
-        String str = "";
-        int add = 0;
-        //  BigNumber result = new BigNumber("4"); // Con el resultado final
+        int result; // Variable donde almacenaremos el resultado de las sumas.
+        String str = ""; // Variable donde almacenaremos el resultado final de la suma en String.
+        int add = 0; // Variable que utilizaremos para ir añadiendo los numeros sobrantes de las sumas.
 
+        //Pondremos una serie de condiciones en las cuales intentaremos igualar ambos números añadiendo 0 a la izquierda.
         if (other.num.length() > this.num.length()) {
             longi = other.num.length();
             while (longi != this.num.length()) {
@@ -30,12 +30,12 @@ class BigNumber {
                 other.num = "0" + other.num;
             }
         }
-
+        // Realizaremos las sumas:
         for (int i = 0; i < this.num.length(); i++) {
             result = (this.num.charAt(this.num.length() - i - 1) - 48) + (other.num.charAt(other.num.length() - i - 1) - 48) + add;
 
             if (result >= 10) {
-                if (i == 0) {
+                if (i == longi -1) {
                     this.num += "1" + this.num;
                     other.num += "0" + this.num;
                     result = result - 10;
@@ -50,7 +50,6 @@ class BigNumber {
         }
         BigNumber resultFinal = new BigNumber(str);
         return resultFinal;
-
     }
 
     // Resta
