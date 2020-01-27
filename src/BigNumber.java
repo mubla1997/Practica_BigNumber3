@@ -13,7 +13,7 @@ class BigNumber {
 
     // Suma
     BigNumber add(BigNumber other) {
-        /*int longi; // Variable en la que guardaremos el tamaño del número más grande de la suma.
+        int longi; // Variable en la que guardaremos el tamaño del número más grande de la suma.
         int result;
         String str = "";
         int add = 0;
@@ -49,8 +49,8 @@ class BigNumber {
             str += String.valueOf(result);
         }
         BigNumber resultFinal = new BigNumber(str);
-        return resultFinal;*/
-        return null;
+        return resultFinal;
+
     }
 
     // Resta
@@ -92,11 +92,13 @@ class BigNumber {
 // si el primer és menor i torna 1 si el segon és menor
     public int compareTo(BigNumber other) {
 
-        if (this.num.length() < other.num.length()) {
+        //Buscamos el número más pequeño y lo igualamos añadiendo ceros a la izquierda.
+        if (other.num.length() < this.num.length()) {
             other.num = Conversion(other.num, this.num.length());
         } else {
             this.num = Conversion(this.num, other.num.length());
         }
+        //Realizamos las comparaciones:
         if (this.num.length() == other.num.length()) {
             if (this.num.equals(other.num)) {
                 return 0;
@@ -119,6 +121,7 @@ class BigNumber {
 
     // Mira si dos objectes BigNumber són iguals
     public boolean equals(Object other) {
+        BigNumber Other = (BigNumber) other;
 
         if (this == other) {
             return true;
@@ -126,7 +129,6 @@ class BigNumber {
         if (!(other instanceof BigNumber)) { // SI other no es un BigNumber dará error
             return false;
         }
-        BigNumber Other = (BigNumber) other;
 
         if (Other.num.length() > this.num.length()){
             this.num = Conversion(this.num,Other.num.length());
@@ -136,9 +138,9 @@ class BigNumber {
         return this.num.equals(Other.num);
     }
 
-    public String Conversion(String str, int longi) {
+    public String Conversion(String str, int longg) {
 
-        while(str.length() != longi){
+        while(str.length() != longg){
                str = "0" + str;
         }
         return str;
