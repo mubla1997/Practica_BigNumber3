@@ -12,6 +12,10 @@ public class BigNumberTest {
         b2 = new BigNumber("02");
         assertEquals(b1, b2);
 
+        b1 = new BigNumber("54");
+        b2 = new BigNumber("45");
+        assertNotEquals(b1,b2);
+
         b1 = new BigNumber("345345234523452352345");
         b2 = new BigNumber("000000000000000345345234523452352345");
         assertEquals(b1, b2);

@@ -18,6 +18,10 @@ class BigNumber {
         String str = ""; // Variable donde almacenaremos el resultado final de la suma en String.
         int add = 0; // Variable que utilizaremos para ir añadiendo los numeros sobrantes de las sumas.
 
+        // Añadiremos un 0 extra en caso de que necesitemos añadir un 1 en el último bucle.
+        this.num = "0" + this.num;
+        other.num = "0" + other.num;
+
         //Pondremos una serie de condiciones en las cuales intentaremos igualar ambos números añadiendo 0 a la izquierda.
         if (other.num.length() > this.num.length()) {
             longi = other.num.length();
@@ -35,18 +39,15 @@ class BigNumber {
             result = (this.num.charAt(this.num.length() - i - 1) - 48) + (other.num.charAt(other.num.length() - i - 1) - 48) + add;
 
             if (result >= 10) {
-                if (i == longi -1) {
-                    this.num += "1" + this.num;
-                    other.num += "0" + this.num;
-                    result = result - 10;
-                } else {
                     add = 1;
                     result = result - 10;
                 }
-            } else {
+             else {
                 add = 0;
             }
-            str += String.valueOf(result);
+
+            str = String.valueOf(result) + str; // necesitamos hacer un reverse del resultado al volver a pasarlo a string.
+
         }
         BigNumber resultFinal = new BigNumber(str);
         return resultFinal;
