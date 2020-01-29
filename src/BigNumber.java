@@ -102,8 +102,12 @@ class BigNumber {
         int mult; // Variable que utilizaremos para escoger el número para realizar la multiplicación.
         int add = 0;  // Variable que utilizaremos para separar los números > 10.
         int sum = 0; // Variable que utilizaremos para realizar las sumas de las multipicaciones.
-        String str = "";
-        BigNumber[] GG = new BigNumber[other.num.length()];
+        String str = ""; // Valor donde vamos almacenando el resultado final de cada multiplicación.
+        String[] GG = new String[other.num.length()]; // Array vacío que utilizaremos para concatenar las sumas.
+
+      // Con este metodo lo que haremos será eliminar todos los 0 situados a la izquierda.
+        this.num =  Conversion3(this.num);
+        other.num = Conversion3(other.num);
 
 
         // En este bucle cogeremos el número que usaremos para multiplicar
@@ -113,37 +117,39 @@ class BigNumber {
 
             // En este bucle realizaremos la multiplicación
             for (int j = 0; j < this.num.length() ; j++) {
-                result = ((this.num.charAt(this.num.length() -i -1) -48) * mult)  + sum;
+                result = ((this.num.charAt(this.num.length() -j -1) -48) * mult)  + add;
 
+                if (result > 9) {
+                    add = result / 10;
+                    result= result % 10;
+                } else {
+                    add = 0;
+                }
+            /*
                 if(result < 10){
                     add = 0;
-                }else if(result > 10) {
+                }else if(result >= 10) {
                     while (result != add) {
                         add++;
                     }
-                    if(add >= 10){
-                        sum = 1 + sum;
-                        add = add - 10;
-                        result = result -10;
-
+                   while(add >= 10) {
+                       sum = 1 + sum;
+                       add = add - 10;
                     }
                 }
+                */
                 str = String.valueOf(result) + str; // Vamos almacenando el resultado final de cada multiplicación.
-
             }
-
-            String conver = Conversion2(str,i);
-            BigNumber converBig = new BigNumber(conver);
-            GG[i] = converBig;
+            GG[i] = Conversion2(str,i);
              str ="";
         }
+        BigNumber resultF = new BigNumber(GG[0]);
 
-        BigNumber resultFinal = GG[0];
-
-        for (int i = 0; i < GG.length-1; i++) {
-            resultFinal = GG[i].add(GG[i+1]);
+        for (int i = 1; i < GG.length -1; i++) {
+            BigNumber easy = new BigNumber(GG[i]);
+            resultF = resultF.add(easy);
         }
-        return resultFinal;
+        return resultF;
     }
 
     // Divideix
@@ -238,4 +244,12 @@ class BigNumber {
         }
         return str;
     }
+
+    //Eliminaremos los 0 innecesarios.
+    public String Conversion3(String str){
+        while(str.length()>0 && str.charAt(0)=='0') {
+            str = str.substring(1);
+        }
+        return str;
+}
 }
