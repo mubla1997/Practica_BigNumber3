@@ -97,47 +97,46 @@ class BigNumber {
 
     // Multiplica
     BigNumber mult(BigNumber other) {
-
-        int result; // Variable que utilizaremos para ir almacenando los resultados de las multiplicaciones.
-        int mult; // Variable que utilizaremos para escoger el número para realizar la multiplicación.
-        int add = 0;  // Variable que utilizaremos para separar los números > 10.
-        int sum = 0; // Variable que utilizaremos para realizar las sumas de las multipicaciones.
-        String str = ""; // Valor donde vamos almacenando el resultado final de cada multiplicación.
-        String[] GG = new String[other.num.length()]; // Array vacío que utilizaremos para concatenar las sumas.
-
-      // Con este metodo lo que haremos será eliminar todos los 0 situados a la izquierda.
-        this.num =  Conversion3(this.num);
+        // Con este metodo lo que haremos será eliminar todos los 0 situados a la izquierda.
+        this.num = Conversion3(this.num);
         other.num = Conversion3(other.num);
+
+        String[] GG = new String[other.num.length()]; // Array vacío que utilizaremos para concatenar las sumas.
+        int result = 0; // Variable que utilizaremos para ir almacenando los resultados de las multiplicaciones.
+        String str = "";
+        int sum = 0;
 
         // En este bucle cogeremos el número que usaremos para multiplicar
         for (int i = 0; i < other.num.length(); i++) {
-            mult = (other.num.charAt(other.num.length() - i - 1) - 48);
 
-            // En este bucle realizaremos la multiplicación
             for (int j = 0; j < this.num.length(); j++) {
-                result = ((this.num.charAt(this.num.length() -j -1) -48) * mult)  + sum;
 
-              if (result < 10) {
-                  sum = 0;
-              } else {
-                  while (result != add) {
-                      add++;
-                  }
-                  while (add >= 10) {
-                      add = add - 10;
-                      sum = 1 + sum;
-                  }
-              }
+                 result = (this.num.charAt(this.num.length() - j - 1) - 48) * (other.num.charAt(other.num.length() - i - 1) - 48) + sum;
+
+                if (result < 10) {
+                    sum = 0;
+                } else {
+                    sum = result / 10;
+                    result = result % 10;
+                }
+
                 str = String.valueOf(result) + str; // Vamos almacenando el resultado final de cada multiplicación.
+
             }
+            if (sum != 0) {
+                str= sum + str;
+                sum = 0;
+            }
+
             GG[i] = Conversion2(str,i); //Realizamos la conversión y lo guardamos en un array de i posiciones.
-             str =""; // Reseteamos el str.
+            str = ""; // Reseteamos el str.
         }
         BigNumber resultF = new BigNumber(GG[0]);
 
-        for (int i = 1; i < GG.length -1; i++) {
-            BigNumber array = new BigNumber(GG[i]); //Creamos un Bignumber para almacenar el numero que iremos sumando
-            resultF = resultF.add(array);
+        // Aquí realizaremos la suma
+        for (int i = 1; i < GG.length; i++) {
+            BigNumber easy = new BigNumber(GG[i]); //Creamos un Bignumber para almacenar el numero que iremos sumando
+            resultF = resultF.add(easy);
         }
         return resultF;
     }
@@ -154,7 +153,14 @@ class BigNumber {
 
     // Potència
     BigNumber power(int n) {
-        return null;
+
+        BigNumber potencia = new BigNumber(this.num);
+        BigNumber resultF = new BigNumber(this.num);
+
+        for (int i = 0; i < n-1; i++) {
+            resultF = resultF.mult(potencia);
+        }
+        return resultF;
     }
 
     // Factorial
