@@ -109,45 +109,35 @@ class BigNumber {
         this.num =  Conversion3(this.num);
         other.num = Conversion3(other.num);
 
-
         // En este bucle cogeremos el número que usaremos para multiplicar
         for (int i = 0; i < other.num.length(); i++) {
-
             mult = (other.num.charAt(other.num.length() - i - 1) - 48);
 
             // En este bucle realizaremos la multiplicación
-            for (int j = 0; j < this.num.length() ; j++) {
-                result = ((this.num.charAt(this.num.length() -j -1) -48) * mult)  + add;
+            for (int j = 0; j < this.num.length(); j++) {
+                result = ((this.num.charAt(this.num.length() -j -1) -48) * mult)  + sum;
 
-                if (result > 9) {
-                    add = result / 10;
-                    result= result % 10;
-                } else {
-                    add = 0;
-                }
-            /*
-                if(result < 10){
-                    add = 0;
-                }else if(result >= 10) {
-                    while (result != add) {
-                        add++;
-                    }
-                   while(add >= 10) {
-                       sum = 1 + sum;
-                       add = add - 10;
-                    }
-                }
-                */
+              if (result < 10) {
+                  sum = 0;
+              } else {
+                  while (result != add) {
+                      add++;
+                  }
+                  while (add >= 10) {
+                      add = add - 10;
+                      sum = 1 + sum;
+                  }
+              }
                 str = String.valueOf(result) + str; // Vamos almacenando el resultado final de cada multiplicación.
             }
-            GG[i] = Conversion2(str,i);
-             str ="";
+            GG[i] = Conversion2(str,i); //Realizamos la conversión y lo guardamos en un array de i posiciones.
+             str =""; // Reseteamos el str.
         }
         BigNumber resultF = new BigNumber(GG[0]);
 
         for (int i = 1; i < GG.length -1; i++) {
-            BigNumber easy = new BigNumber(GG[i]);
-            resultF = resultF.add(easy);
+            BigNumber array = new BigNumber(GG[i]); //Creamos un Bignumber para almacenar el numero que iremos sumando
+            resultF = resultF.add(array);
         }
         return resultF;
     }

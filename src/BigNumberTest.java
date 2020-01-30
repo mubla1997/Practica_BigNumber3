@@ -164,6 +164,7 @@ public class BigNumberTest {
         b1 = new BigNumber("6");
         b2 = new BigNumber("6");
         assertEquals(b1, b2);
+        BigNumber res = b1.mult(b2);
         assertEquals(new BigNumber("36"), b1.mult(b2));
 
         b1 = new BigNumber("3");
@@ -172,7 +173,6 @@ public class BigNumberTest {
 
         b1 = new BigNumber("12");
         b2 = new BigNumber("2");
-        BigNumber res = b1.mult(b2);
         assertEquals(new BigNumber("24"), b1.mult(b2));
 
         b1 = new BigNumber("685");
