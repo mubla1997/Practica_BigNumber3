@@ -55,10 +55,10 @@ class BigNumber {
 
     // Resta
     BigNumber sub(BigNumber other) {
-        int longi; // Variable en la que guardaremos el tamaño del número más grande de la suma.
-        int result; // Variable donde almacenaremos el resultado de las sumas.
-        String str = ""; // Variable donde almacenaremos el resultado final de la suma en String.
-        int add = 0; // Variable que utilizaremos para ir añadiendo los numeros sobrantes de las sumas.
+        int longi; // Variable en la que guardaremos el tamaño del número más grande de la resta.
+        int result; // Variable donde almacenaremos el resultado de las restas.
+        String str = ""; // Variable donde almacenaremos el resultado final de la resta en String.
+        int add = 0; // Variable que utilizaremos para ir añadiendo los numeros sobrantes de las restas.
 
         // Añadiremos un 0 extra en caso de que necesitemos añadir un 1 en el último bucle.
         this.num = "0" + this.num;
@@ -170,8 +170,26 @@ class BigNumber {
 
     // MCD. Torna el Màxim comú divisor
     BigNumber mcd(BigNumber other) {
-        return null;
-    }
+
+        // Lo primero quitaremos los ceros innecesarios
+       this.num = Conversion3(this.num);
+        other.num = Conversion3(other.num);
+        // Guardaremos ambos numeros con 
+        BigNumber num1 = new BigNumber(this.num);
+        BigNumber num2 = new BigNumber(other.num);
+
+            while(num1.compareTo(num2) != 0) {
+                if (num1.compareTo(num2) == 1) {
+                    num1 = num1.sub(num2);
+
+                } else {
+                    num2 = num2.sub(num1);
+                }
+            }
+            return num1;
+        }
+
+
 
     // Compara dos BigNumber. Torna 0 si són iguals, -1.
 // si el primer és menor i torna 1 si el segon és menor
