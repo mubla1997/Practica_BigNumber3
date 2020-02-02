@@ -165,22 +165,14 @@ class BigNumber {
 
     // Factorial
     BigNumber factorial() {
-        BigNumber resultF;
-        int num =this.num.length();
-        int result = this.num.length();
-        String str;
+        BigNumber resultF = new BigNumber(this.num);
+        int num = Integer.valueOf(this.num); // Valor que utilizaremos para ir bajando el contador del bucle.
+        BigNumber result = new BigNumber(this.num); // Valor que iremos utilizando para ir multiplicando y disminuyendo su numero.
 
-        if(result == 0){
-            resultF = new BigNumber("1");
-        }else {
-            while (result != 0) {
-                result = result * num;
-                num--;
-            }
+        for (int i = 0; i < num -1; i++) {
+            result = result.sub(new BigNumber("1"));
+            resultF = resultF.mult(result);
         }
-        str = String.valueOf(result);
-        resultF = new BigNumber(str);
-
         return resultF;
     }
 
