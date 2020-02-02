@@ -165,7 +165,23 @@ class BigNumber {
 
     // Factorial
     BigNumber factorial() {
-        return null;
+        BigNumber resultF;
+        int num =this.num.length();
+        int result = this.num.length();
+        String str;
+
+        if(result == 0){
+            resultF = new BigNumber("1");
+        }else {
+            while (result != 0) {
+                result = result * num;
+                num--;
+            }
+        }
+        str = String.valueOf(result);
+        resultF = new BigNumber(str);
+
+        return resultF;
     }
 
     // MCD. Torna el Màxim comú divisor
@@ -174,10 +190,12 @@ class BigNumber {
         // Lo primero quitaremos los ceros innecesarios
        this.num = Conversion3(this.num);
         other.num = Conversion3(other.num);
-        // Guardaremos ambos numeros con 
+
+        // Guardaremos ambos numeros en Bignumber
         BigNumber num1 = new BigNumber(this.num);
         BigNumber num2 = new BigNumber(other.num);
 
+        // Realizamos el MCD
             while(num1.compareTo(num2) != 0) {
                 if (num1.compareTo(num2) == 1) {
                     num1 = num1.sub(num2);
@@ -261,6 +279,7 @@ class BigNumber {
 
     //Eliminaremos los 0 innecesarios.
     public String Conversion3(String str){
+
         while(str.length()>0 && str.charAt(0)=='0') {
             str = str.substring(1);
         }

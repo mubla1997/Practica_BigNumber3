@@ -331,6 +331,7 @@ public class BigNumberTest {
         b1 = new BigNumber("245456345356");
         b2 = new BigNumber("583453453452784");
         assertEquals(new BigNumber("4"), b1.mcd(b2));
+
         /*
         b1 = new BigNumber("2454563453452346787893523445675534535656678678356");
         b2 = new BigNumber("5");
